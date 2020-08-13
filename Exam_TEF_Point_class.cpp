@@ -1,6 +1,12 @@
 #include <iostream>
 using namespace std;
 
+
+                                               /*it was an exam problem to solve, but personally my opinion is:
+                                               in this kind of relationship we should not use inheritance, 
+                                               as class colour should not have such methods as setX/setY/getX/getY
+                                               colour "is not" a point (inheritance has a relationships "is a"), 
+                                               so here it is better to use aggregation(Point "has a" colour)*/
 class Point
 {
 private:
@@ -28,7 +34,7 @@ public:
     {
         if (y < 0 || y > 599)
         {
-            throw "y must be from 0 to 599. setY was unsuccessfull. y will be set 0 by default.";
+            throw exception("y must be from 0 to 599. setY was unsuccessfull. y will be set 0 by default.");
         }
         m_y = y;
     }
@@ -106,63 +112,62 @@ public:
 
 int main()
 {
-   
-    Point a,b,c;
+    Point a, b, c;
     try
     {
-        a.setX(500);
+       
+        a.setX(99);
+        a.setY(78);
+        
+        b.setX(700);
+        b.setY(67);
+        
+        c.setX(56);
+        c.setY(350);
+
+    }
+    catch (const exception& except)
+    {
+        cout << "Caught exception: " << except.what() << endl;
+    }
+
+    cout << "a fields:" << endl;
+    a.showFields();
+
+    cout << "b fields:" << endl;
+    b.showFields();
+
+    cout << "c fields:" << endl;
+    c.showFields();
+
+    Colour a_col, b_col, c_col;
+    try
+    {
+        a_col.setColour(124, 45, 98);
+        b_col.setColour(16, 87, 94);
+        c_col.setColour(98, 33, 90);
         
     }
     catch (const exception& except)
     {
         cout << "Caught exception: " << except.what() << endl;
     }
-    try
-    {
-        a.setY(599);
-    }
-    catch(const char* except)
-    {
-        cout << "Caught exception: " << except << endl;
-    }
-
-    
-    cout <<"a x= "<< a.getX() << endl;
-    cout << "a y= " << a.getY() << endl;
-    b.setX(500);
-    b.setY(599);
-    cout << "b x= " << b.getX() << endl;
-    cout << "b y= " << b.getY() << endl;
-    c = a + b;
-    cout << "c = sum of a and b:" << endl;
-    c.showFields();
-
-    Colour a_col, b_col;
-    try
-    {
-        a_col.setColour(255, 125, 45);
-    }
-    catch(const exception & except)
-    {
-        cout << "Caught exception: " << except.what() << endl;
-    }
-    cout << "a_col object has fields: " << endl;
+    cout << "a_col fields:" << endl;
     a_col.showFields();
-    try
-    {
-        b_col.setColour(45, 200, 31);
-    }
-    catch (const exception& except)
-    {
-        cout << "Caught exception: " << except.what() << endl;
-    }
-    cout << "b_col object has fields: " << endl;
+    cout << "b_col fields:" << endl;
     b_col.showFields();
-    Colour c_col;
-    c_col = a_col + b_col;
-    cout << "c_col sum of a_col+b_col:" << endl;
+    cout << "c_col fields:" << endl;
     c_col.showFields();
-   
+
+    Point d = a + b;
+    Colour d_col = a_col + b_col;
+
+    cout << "d fields:" << endl;
+    d.showFields();
+
+    cout << "d_col fields:" << endl;
+    d_col.showFields();
+
     return 0;
 }
 
