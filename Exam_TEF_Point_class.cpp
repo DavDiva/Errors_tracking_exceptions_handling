@@ -7,6 +7,16 @@ using namespace std;
                                                as class colour should not have such methods as setX/setY/getX/getY
                                                colour "is not" a point (inheritance has a relationships "is a"), 
                                                so here it is better to use aggregation(Point "has a" colour)*/
+
+/*another problem that doesn`t suit me is that try catch blocks 
+like in code below catch only the first throw and other 
+variables are initialized by default with zeros. When we wold need to use these variables in further code this might lead to problems. 
+The problem can be solved with using for every setter method unique try catch block 
+but that leads to overloaded code in main. How to solve this issue? Will investigate. 
+Maybe it is better to terminate the programm with exit() or better assert()*/
+
+
+
 class Point
 {
 private:
@@ -119,7 +129,7 @@ int main()
         a.setX(99);
         a.setY(78);
         
-        b.setX(700);
+        b.setX(800);
         b.setY(67);
         
         c.setX(56);
